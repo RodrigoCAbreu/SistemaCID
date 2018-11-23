@@ -85,8 +85,7 @@ public class TelaCadastroTurma extends JFrame {
 		contentPane.add(lblNewLabel_3);
 		
 		String[] diasSemana = {"Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira"};
-		@SuppressWarnings("unchecked")
-		JComboBox<?> comboBox = new JComboBox(diasSemana);
+		JComboBox<String> comboBox = new JComboBox<>(diasSemana);
 		comboBox.setBounds(236, 238, 200, 20);
 		contentPane.add(comboBox);
 		

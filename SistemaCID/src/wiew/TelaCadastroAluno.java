@@ -108,8 +108,7 @@ public class TelaCadastroAluno extends JFrame {
 		
 		String[] escolaridade = {"Ensino fundamental incompleto", "Ensino fundamental completo", "Ensino médio incompleto",
 				"Ensino médio completo", "Ensino superior"};
-		@SuppressWarnings("unchecked")
-		JComboBox<?> cbEscolaridade = new JComboBox(escolaridade);
+		JComboBox<String> cbEscolaridade = new JComboBox<>(escolaridade);
 		cbEscolaridade.setFont(new Font("Arial", Font.PLAIN, 12));
 		cbEscolaridade.setBounds(116, 288, 200, 20);
 		contentPane.add(cbEscolaridade);

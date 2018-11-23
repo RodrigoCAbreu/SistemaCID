@@ -1,0 +1,24 @@
+create table aluno (
+id int unsigned zerofill NOT NULL AUTO_INCREMENT,
+nome varchar(40) not null,
+data varchar(15) not null,
+nomeMae varchar(40) not null,
+cpf int(12) not null, 
+telefone varchar(15),
+celular varchar(15),
+escolaridade Varchar(40) not null,
+Primary Key (id,cpf)) ENGINE = MyISAM;
+
+
+create table professor (
+id int unsigned zerofill NOT NULL AUTO_INCREMENT,
+nome varchar(40) not null,
+Primary Key (id)) ENGINE = MyISAM;
+
+
+create table turmas (
+id int unsigned zerofill NOT NULL AUTO_INCREMENT,
+turma varchar(40) not null,
+hora1 varchar(15) not null,
+hora2 varchar(15) not null,
+Primary Key (id)) ENGINE = MyISAM;

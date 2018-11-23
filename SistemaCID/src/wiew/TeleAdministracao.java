@@ -1,14 +1,11 @@
 package wiew;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JButton;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JMenu;
@@ -82,6 +79,12 @@ public class TeleAdministracao extends JFrame {
 		menuBar.add(mnTurmas);
 		
 		JMenuItem mntmCadastrarTurmas = new JMenuItem("Cadastrar turma");
+		mntmCadastrarTurmas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaCadastroTurma tcturma = new TelaCadastroTurma();
+				tcturma.setVisible(true);
+			}
+		});
 		mnTurmas.add(mntmCadastrarTurmas);
 		
 		JMenuItem mntmPesquisarTurmas = new JMenuItem("Pesquisar turma");

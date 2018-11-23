@@ -20,10 +20,8 @@ public class TelaCadastroAluno extends JFrame {
 	private JTextField tfNomeMae;
 	private JTextField tfTelefone;
 	private JTextField tfCelular;
+	private JTextField tfcpf;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -36,12 +34,9 @@ public class TelaCadastroAluno extends JFrame {
 			}
 		});
 	}
-
-	/**
-	 * Create the frame.
-	 */
+	
 	public TelaCadastroAluno() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 750, 430);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -64,12 +59,12 @@ public class TelaCadastroAluno extends JFrame {
 		
 		JLabel lblNewLabel_1 = new JLabel("Data Nascimento:");
 		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 12));
-		lblNewLabel_1.setBounds(415, 114, 108, 14);
+		lblNewLabel_1.setBounds(373, 113, 108, 14);
 		contentPane.add(lblNewLabel_1);
 		
 		tfData = new JTextField();
 		tfData.setFont(new Font("Arial", Font.PLAIN, 12));
-		tfData.setBounds(523, 111, 100, 20);
+		tfData.setBounds(491, 110, 161, 20);
 		contentPane.add(tfData);
 		tfData.setColumns(10);
 		
@@ -97,12 +92,12 @@ public class TelaCadastroAluno extends JFrame {
 		
 		JLabel lblCelular = new JLabel("Celular:");
 		lblCelular.setFont(new Font("Arial", Font.PLAIN, 12));
-		lblCelular.setBounds(415, 229, 46, 14);
+		lblCelular.setBounds(435, 228, 46, 14);
 		contentPane.add(lblCelular);
 		
 		tfCelular = new JTextField();
 		tfCelular.setFont(new Font("Arial", Font.PLAIN, 12));
-		tfCelular.setBounds(462, 226, 161, 20);
+		tfCelular.setBounds(491, 225, 161, 20);
 		contentPane.add(tfCelular);
 		tfCelular.setColumns(10);
 		
@@ -111,7 +106,10 @@ public class TelaCadastroAluno extends JFrame {
 		lblEscolaridade.setBounds(25, 290, 76, 14);
 		contentPane.add(lblEscolaridade);
 		
-		JComboBox cbEscolaridade = new JComboBox();
+		String[] escolaridade = {"Ensino fundamental incompleto", "Ensino fundamental completo", "Ensino médio incompleto",
+				"Ensino médio completo", "Ensino superior"};
+		@SuppressWarnings("unchecked")
+		JComboBox<?> cbEscolaridade = new JComboBox(escolaridade);
 		cbEscolaridade.setFont(new Font("Arial", Font.PLAIN, 12));
 		cbEscolaridade.setBounds(116, 288, 200, 20);
 		contentPane.add(cbEscolaridade);
@@ -125,5 +123,15 @@ public class TelaCadastroAluno extends JFrame {
 		btnCancelar.setFont(new Font("Arial", Font.PLAIN, 12));
 		btnCancelar.setBounds(229, 339, 89, 23);
 		contentPane.add(btnCancelar);
+		
+		JLabel lblNewLabel_3 = new JLabel("CPF:");
+		lblNewLabel_3.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblNewLabel_3.setBounds(444, 172, 37, 14);
+		contentPane.add(lblNewLabel_3);
+		
+		tfcpf = new JTextField();
+		tfcpf.setBounds(491, 170, 161, 20);
+		contentPane.add(tfcpf);
+		tfcpf.setColumns(10);
 	}
 }

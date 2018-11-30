@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
@@ -24,9 +25,10 @@ public class TelaProfessor extends JFrame implements ActionListener, ListSelecti
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField textField;
+	private JTextField tfNome;
 	private ProfessorController control = new ProfessorController();
 	private JTable table = new JTable(control);
+	private JTextField tfID;
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -56,13 +58,23 @@ public class TelaProfessor extends JFrame implements ActionListener, ListSelecti
 		
 		JLabel lblNewLabel = new JLabel("Nome:");
 		lblNewLabel.setFont(new Font("Arial", Font.PLAIN, 12));
-		lblNewLabel.setBounds(73, 76, 46, 14);
+		lblNewLabel.setBounds(190, 76, 46, 14);
 		contentPane.add(lblNewLabel);
 		
-		textField = new JTextField();
-		textField.setBounds(129, 74, 500, 20);
-		contentPane.add(textField);
-		textField.setColumns(10);
+		tfNome = new JTextField();
+		tfNome.setBounds(258, 74, 371, 20);
+		contentPane.add(tfNome);
+		tfNome.setColumns(10);
+		
+		JLabel lblId = new JLabel("ID:");
+		lblId.setBounds(65, 77, 46, 14);
+		contentPane.add(lblId);
+		
+		tfID = new JTextField();
+		tfID.setEditable(false);
+		tfID.setBounds(87, 74, 86, 20);
+		contentPane.add(tfID);
+		tfID.setColumns(10);
 		
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -71,8 +83,18 @@ public class TelaProfessor extends JFrame implements ActionListener, ListSelecti
 		
 		JButton btnPesquisar = new JButton("Pesquisar");
 		btnPesquisar.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnPesquisar.setBounds(172, 130, 100, 24);
+		btnPesquisar.setBounds(222, 130, 100, 24);
 		contentPane.add(btnPesquisar);
+		
+		JButton btnAtualizar = new JButton("Atualizar");
+		btnAtualizar.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnAtualizar.setBounds(375, 130, 100, 24);
+		contentPane.add(btnAtualizar);
+		
+		JButton btnExcluir = new JButton("Excluir");
+		btnExcluir.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnExcluir.setBounds(540, 132, 89, 23);
+		contentPane.add(btnExcluir);
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setBounds(73, 175, 556, 227);
@@ -86,8 +108,10 @@ public class TelaProfessor extends JFrame implements ActionListener, ListSelecti
 		
 		btnCadastrar.addActionListener(this);
 		btnPesquisar.addActionListener(this);
-		scrollPane.setViewportView(table);
+		btnAtualizar.addActionListener(this);
+		btnExcluir.addActionListener(this);
 		
+		scrollPane.setViewportView(table);
 	}
 
 	@Override
@@ -95,21 +119,47 @@ public class TelaProfessor extends JFrame implements ActionListener, ListSelecti
 		String cmd = e.getActionCommand();
 		if ("Cadastrar".equals(cmd)) {
 			Professor p = new Professor();
-			p.setNome(textField.getText());
+			p.setNome(tfNome.getText());
 			control.adicionar(p);
+			JOptionPane.showMessageDialog(null, "Professor cadastrado com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 			table.invalidate();
 			table.revalidate();
 			table.repaint();
-			textField.setText("");
-		} else {
-			Professor p = control.consultaProfessor(textField.getText());
+			tfNome.setText("");
+		} else if ("Pesquisar".equals(cmd)) {
+			Professor p = control.consultaProfessor(tfNome.getText());
 			if ( p != null) {
-				textField.setText(p.getNome());
+				tfNome.setText(p.getNome());
 			}
 			table.invalidate();
 			table.revalidate();
 			table.repaint();
-			textField.setText("");
+			tfNome.setText("");
+		} else if ("Atualizar".equals(cmd)) {
+			Professor p = new Professor();
+			p.setId(Integer.parseInt(tfID.getText()));
+			p.setNome(tfNome.getText());
+			control.atualizarProfessor(p);
+			JOptionPane.showMessageDialog(null, "Cadastro Atualizado com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+			table.invalidate();
+			table.revalidate();
+			table.repaint();
+			tfNome.setText("");
+			tfID.setText("");
+		} else {
+			int conf = 0;
+			conf = JOptionPane.showConfirmDialog(rootPane, "Deseja excluir esse registro");
+				if( conf == JOptionPane.YES_NO_OPTION) {
+					Professor p = new Professor();
+					p.setId(Integer.parseInt(tfID.getText()));
+					control.removerProfessor(p);
+					JOptionPane.showMessageDialog(null, "Cadastro excluído com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+					table.invalidate();
+					table.revalidate();
+					table.repaint();
+					tfID.setText("");
+					tfNome.setText("");
+				}
 		}
 
 		
@@ -118,6 +168,7 @@ public class TelaProfessor extends JFrame implements ActionListener, ListSelecti
 	@Override
 	public void valueChanged(ListSelectionEvent arg0) {
 		Professor p = control.getProfessorFromRow( table.getSelectedRow());
-		textField.setText(p.getNome());
+		tfNome.setText(p.getNome());
+		tfID.setText(String.valueOf(p.getId()));
 	}
 }

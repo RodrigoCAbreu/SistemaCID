@@ -112,6 +112,12 @@ public class TelaAdministracao extends JFrame {
 		mnTurmas.add(mntmPesquisarTurmas);
 		
 		JMenuItem mntmExcluirTurma = new JMenuItem("Excluir");
+		mntmExcluirTurma.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaExcluirTurma teTurma = new TelaExcluirTurma();
+				teTurma.setVisible(true);
+			}
+		});
 		mnTurmas.add(mntmExcluirTurma);
 		
 		JMenu mnProfessor = new JMenu("Professor");

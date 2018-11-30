@@ -9,6 +9,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
@@ -148,6 +149,7 @@ public class TelaCadastroAluno extends JFrame {
 					a.setCelular(tfCelular.getText());
 					a.setEscolaridade(Escolaridade[cbEscolaridade.getSelectedIndex()]);
 					control.adicionar(a);
+					JOptionPane.showMessageDialog(null, "Aluno cadastrado com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 					table.invalidate();
 					table.revalidate();
 					table.repaint();

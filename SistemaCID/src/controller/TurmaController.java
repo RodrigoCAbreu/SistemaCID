@@ -37,6 +37,16 @@ public class TurmaController implements TableModel {
 		return null;
 	}
 	
+	public void removerTurma(Turma t) {
+		try {
+			turmaDAO.removerTurma(t);
+		} catch (GenericDAOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	
 	public Turma getTurmaFromRow(int row) {
 		return turma.get(row);
 	}
@@ -52,7 +62,7 @@ public class TurmaController implements TableModel {
 		case 0 : return String.class;
 		case 1 : return String.class;
 		case 2 : return String.class;
-		case 3 : return String.class;
+		case 3 : return int.class;
 		}
 		return String.class;
 	}
@@ -67,9 +77,9 @@ public class TurmaController implements TableModel {
 	public String getColumnName(int col) {
 		switch (col) {
 		case 0 : return "Turma";
-		case 1 : return "Professor";
-		case 2 : return "Hora de inicio";
-		case 3 : return "Hora de Termino";
+		case 1 : return "Hora de inicio";
+		case 2 : return "Hora de Termino";
+		case 3 : return "ID";
 		}
 		return "";
 	}
@@ -84,9 +94,9 @@ public class TurmaController implements TableModel {
 		Turma t = turma.get(row);
 		switch (col) {
 		case 0 : return t.getTurma();
-		case 1 : 
-		case 2 : return t.getHora1();
-		case 3 : return t.getHora2();
+		case 1 : return t.getHora1();
+		case 2 : return t.getHora2();
+		case 3 : return t.getId();
 		}
 		return "";
 	}

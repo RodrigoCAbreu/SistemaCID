@@ -8,7 +8,6 @@ import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -20,17 +19,18 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import controller.AlunoController;
-import model.Aluno;
+import controller.TurmaController;
+import model.Turma;
+import javax.swing.JButton;
 
 
-public class TelaExcluiAluno extends JFrame implements ActionListener, ListSelectionListener {
+public class TelaExcluirTurma extends JFrame implements ActionListener, ListSelectionListener {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private AlunoController control = new AlunoController();
+	private TurmaController control = new TurmaController();
 	private JTable table = new JTable(control);
-	private JTextField tfNome;
+	private JTextField tfTurma;
 	private JTextField tfID;
 	
 
@@ -38,7 +38,7 @@ public class TelaExcluiAluno extends JFrame implements ActionListener, ListSelec
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TelaExcluiAluno frame = new TelaExcluiAluno();
+					TelaExcluirTurma frame = new TelaExcluirTurma();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,7 +48,7 @@ public class TelaExcluiAluno extends JFrame implements ActionListener, ListSelec
 	}
 
 	
-	public TelaExcluiAluno() {
+	public TelaExcluirTurma() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 730, 450);
 		contentPane = new JPanel();
@@ -59,36 +59,40 @@ public class TelaExcluiAluno extends JFrame implements ActionListener, ListSelec
 		panTable.setBounds(0, 0, 692, 432);
 		
 		
-		JLabel lblNewLabel = new JLabel("Alunos cadastrados no sistema");
+		JLabel lblNewLabel = new JLabel("Turmas cadastradas no sistema");
 		lblNewLabel.setFont(new Font("Arial", Font.BOLD, 16));
 		lblNewLabel.setBounds(231, 23, 248, 30);
 		contentPane.add(lblNewLabel);
 		
+		JLabel lblNome = new JLabel("Turma:");
+		lblNome.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblNome.setBounds(124, 67, 46, 15);
+		contentPane.add(lblNome);
+		
+		tfTurma = new JTextField();
+		tfTurma.setFont(new Font("Arial", Font.PLAIN, 12));
+		tfTurma.setBounds(180, 64, 324, 20);
+		contentPane.add(tfTurma);
+		tfTurma.setColumns(10);
+		
+		JLabel lblId = new JLabel("ID:");
+		lblId.setFont(new Font("Arial", Font.PLAIN, 12));
+		lblId.setBounds(24, 62, 24, 14);
+		contentPane.add(lblId);
+		
 		tfID = new JTextField();
-		tfID.setBounds(40, 65, 79, 20);
+		tfID.setBounds(55, 65, 46, 20);
 		contentPane.add(tfID);
 		tfID.setColumns(10);
 		
-		JLabel lblNome = new JLabel("Nome:");
-		lblNome.setFont(new Font("Arial", Font.PLAIN, 12));
-		lblNome.setBounds(149, 67, 46, 15);
-		contentPane.add(lblNome);
-		
-		tfNome = new JTextField();
-		tfNome.setFont(new Font("Arial", Font.PLAIN, 12));
-		tfNome.setBounds(205, 64, 248, 20);
-		contentPane.add(tfNome);
-		tfNome.setColumns(10);
-		
 		Button btnPesquisar = new Button("Pesquisar");
 		btnPesquisar.setBackground(Color.CYAN);
-		btnPesquisar.setBounds(474, 62, 70, 22);
+		btnPesquisar.setBounds(520, 62, 70, 22);
 		contentPane.add(btnPesquisar);
 		
 		JButton btnExcluir = new JButton("Excluir");
 		btnExcluir.setBackground(Color.RED);
-		btnExcluir.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnExcluir.setBounds(564, 63, 89, 23);
+		btnExcluir.setBounds(601, 62, 89, 23);
 		contentPane.add(btnExcluir);
 		
 		JPanel panel = new JPanel();
@@ -110,11 +114,6 @@ public class TelaExcluiAluno extends JFrame implements ActionListener, ListSelec
 		panPrincipal.setLayout(null);
 		panTable.setViewportView(table);
 		panPrincipal.add(panTable);
-		
-		JLabel lblID = new JLabel("ID:");
-		lblID.setBounds(10, 68, 23, 14);
-		contentPane.add(lblID);
-		
 	}
 
 
@@ -122,38 +121,34 @@ public class TelaExcluiAluno extends JFrame implements ActionListener, ListSelec
 	public void actionPerformed(ActionEvent e) {
 		String cmd = e.getActionCommand();
 		if ("Pesquisar".equals(cmd)) {
-			Aluno a = control.consultaListaAluno(tfNome.getText());
-			if ( a!= null ) {
-				tfNome.setText(a.getNome());
+			Turma t = control.consultaTurma(tfTurma.getText());
+			if ( t!= null ) {
+				tfTurma.setText(t.getTurma());
 			}
 			table.invalidate();
 			table.revalidate();
 			table.repaint();
-		} 
-			
+		}
+		
 		if ("Excluir".equals(cmd)) {
 			int conf = 0;
 			conf = JOptionPane.showConfirmDialog(rootPane, "Deseja excluir esse registro");
-				if( conf == JOptionPane.YES_NO_OPTION) {
-					Aluno a = new Aluno();
-					a.setId(Integer.parseInt(tfID.getText()));
-					control.removerAluno(a);
-					table.invalidate();
-					table.revalidate();
-					table.repaint();
-					tfID.setText("");
-					tfNome.setText("");
-				}
+			if( conf == JOptionPane.YES_NO_OPTION) {
+				Turma t = new Turma();
+				t.setId(Integer.parseInt(tfID.getText()));
+				control.removerTurma(t);
+				tfID.setText("");
+				tfTurma.setText("");
+			}
 		}
 	}
 
-
 	@Override
 	public void valueChanged(ListSelectionEvent e) {
-		Aluno a = control.getAlunoFromRow( table.getSelectedRow() );
-		if (a != null) {
-			tfNome.setText(String.valueOf(a.getNome()));
-			tfID.setText(String.valueOf(a.getId()));
+		Turma t = control.getTurmaFromRow( table.getSelectedRow() );
+		if (t != null) {
+			tfTurma.setText(String.valueOf(t.getTurma()));
+			tfID.setText(String.valueOf(t.getId()));
 		}
 	}
 }

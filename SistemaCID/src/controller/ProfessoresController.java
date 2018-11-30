@@ -1,5 +1,7 @@
 package controller;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 
 import javax.swing.JComboBox;
@@ -9,7 +11,7 @@ import dao.ProfessorDAO;
 import dao.ProfessorDAOImpl;
 import model.Professor;
 
-public class ProfessoresController implements IProfessoresController{
+public class ProfessoresController implements IProfessoresController, ActionListener {
 	
 	private JComboBox<Professor> comboBox;
 	
@@ -34,6 +36,13 @@ public class ProfessoresController implements IProfessoresController{
 			e.printStackTrace();
 		}
 		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		if (comboBox.getItemCount() > 0) {
+			Professor p = (Professor) comboBox.getSelectedItem();	
+		}
 	}
 
 }

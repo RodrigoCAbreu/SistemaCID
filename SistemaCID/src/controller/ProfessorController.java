@@ -37,6 +37,24 @@ public class ProfessorController implements TableModel {
 		return null;
 		
 	}
+	
+	public void atualizarProfessor(Professor p) {
+		try {
+			professorDAO.atualizaProfessor(p);
+		} catch (GenericDAOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+
+	public void removerProfessor(Professor p) {
+		try {
+			professorDAO.removerProfessor(p);
+		} catch (GenericDAOException e) {
+			e.printStackTrace();
+		}
+		
+	}
 
 	@Override
 	public void addTableModelListener(TableModelListener arg0) {
@@ -47,20 +65,22 @@ public class ProfessorController implements TableModel {
 	@Override
 	public Class<?> getColumnClass(int col) {
 		switch (col) {
-		case 0 : return String.class;
+		case 0 : return int.class;
+		case 1 : return String.class;
 		}
 		return String.class;
 	}
 
 	@Override
 	public int getColumnCount() {
-		return 1;
+		return 2;
 	}
 
 	@Override
 	public String getColumnName(int col) {
 		switch (col) {
-		case 0 : return "Nome do Professor";
+		case 0 : return "ID";
+		case 1 : return "Nome do professor";
 		}
 		return "";
 	}
@@ -74,7 +94,8 @@ public class ProfessorController implements TableModel {
 	public Object getValueAt(int row, int col) {
 		Professor p = professor.get(row);
 		switch (col) {
-		case 0 : return p.getNome();
+		case 0 : return p.getId();
+		case 1 : return p.getNome();
 		}
 		return "";
 	}

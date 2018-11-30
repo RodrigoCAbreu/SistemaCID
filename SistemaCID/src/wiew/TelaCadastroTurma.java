@@ -5,19 +5,17 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import controller.ProfessoresController;
 import controller.TurmaController;
-import model.Professor;
 import model.Turma;
 
 public class TelaCadastroTurma extends JFrame implements ActionListener {
@@ -45,7 +43,8 @@ public class TelaCadastroTurma extends JFrame implements ActionListener {
 			}
 		});
 	}
-
+	
+	
 	public TelaCadastroTurma() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 730, 450);
@@ -69,48 +68,38 @@ public class TelaCadastroTurma extends JFrame implements ActionListener {
 		contentPane.add(tfturma);
 		tfturma.setColumns(10);
 		
-		JLabel lblNewLabel_1 = new JLabel("Professor:");
-		lblNewLabel_1.setFont(new Font("Arial", Font.PLAIN, 12));
-		lblNewLabel_1.setBounds(160, 175, 63, 22);
-		contentPane.add(lblNewLabel_1);
-		
-		
-//		cbProfessor.setFont(new Font("Arial", Font.PLAIN, 12));
-//		cbProfessor.setBounds(236, 176, 347, 20);
-//		contentPane.add(cbProfessor);
-		
 		JLabel lblNewLabel_2 = new JLabel("Hor\u00E1rio:");
 		lblNewLabel_2.setFont(new Font("Arial", Font.PLAIN, 12));
-		lblNewLabel_2.setBounds(160, 279, 46, 22);
+		lblNewLabel_2.setBounds(160, 255, 46, 22);
 		contentPane.add(lblNewLabel_2);
 		
 		tfHora = new JTextField();
-		tfHora.setBounds(236, 281, 40, 20);
+		tfHora.setBounds(236, 255, 40, 20);
 		contentPane.add(tfHora);
 		tfHora.setColumns(10);
 		
 		JLabel lblNewLabel_3 = new JLabel("Dia:");
 		lblNewLabel_3.setFont(new Font("Arial", Font.PLAIN, 12));
-		lblNewLabel_3.setBounds(160, 232, 30, 14);
+		lblNewLabel_3.setBounds(160, 190, 30, 14);
 		contentPane.add(lblNewLabel_3);
 	
 		cbDiaSemana.setFont(new Font("Arial", Font.PLAIN, 12));
-		cbDiaSemana.setBounds(236, 238, 347, 20);
+		cbDiaSemana.setBounds(236, 190, 347, 20);
 		contentPane.add(cbDiaSemana);
 		
 		JLabel lbls = new JLabel("horas \u00E0s");
 		lbls.setFont(new Font("Arial", Font.PLAIN, 12));
-		lbls.setBounds(286, 283, 66, 14);
+		lbls.setBounds(286, 255, 66, 14);
 		contentPane.add(lbls);
 		
 		tfHoras1 = new JTextField();
-		tfHoras1.setBounds(345, 281, 40, 20);
+		tfHoras1.setBounds(345, 255, 40, 20);
 		contentPane.add(tfHoras1);
 		tfHoras1.setColumns(10);
 		
 		JLabel lblNewLabel_4 = new JLabel("horas");
 		lblNewLabel_4.setFont(new Font("Arial", Font.PLAIN, 12));
-		lblNewLabel_4.setBounds(402, 284, 46, 14);
+		lblNewLabel_4.setBounds(402, 255, 46, 14);
 		contentPane.add(lblNewLabel_4);
 		
 		JButton btnCadastrarTurma = new JButton("Cadastrar");
@@ -126,10 +115,10 @@ public class TelaCadastroTurma extends JFrame implements ActionListener {
 					t.setHora1(tfHora.getText());
 					t.setHora2(tfHoras1.getText());
 					control.adicionar(t);
+					JOptionPane.showMessageDialog(null, "Turma cadastrada com sucesso", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 					table.invalidate();
 					table.revalidate();
 					table.repaint();
-					System.out.println("cadastro adicionado com sucesso");
 					tfturma.setText("");
 					tfHora.setText("");
 					tfHoras1.setText("");
@@ -140,6 +129,18 @@ public class TelaCadastroTurma extends JFrame implements ActionListener {
 		JButton btnCancelarTurma = new JButton("Cancelar");
 		btnCancelarTurma.setBounds(269, 345, 99, 23);
 		contentPane.add(btnCancelarTurma);
+		btnCancelarTurma.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String cmd = e.getActionCommand();
+				if ("Cancelar".equals(cmd)) {
+					tfturma.setText("");
+					tfHora.setText("");
+					tfHoras1.setText("");
+				}
+			}
+		});
+		
+		
 	}
 
 	@Override

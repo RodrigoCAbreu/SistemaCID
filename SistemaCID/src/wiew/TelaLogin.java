@@ -73,6 +73,7 @@ public class TelaLogin extends JFrame {
 		
 		JButton btnEntrar = new JButton("Entrar");
 		btnEntrar.addActionListener(new ActionListener() {
+			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
 				if (tfLogin.getText().equals("administrador") && tfPass.getText().equals("123456")) {
 					TelaAdministracao tela = new TelaAdministracao();

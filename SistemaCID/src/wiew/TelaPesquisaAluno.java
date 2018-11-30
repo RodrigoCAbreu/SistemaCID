@@ -8,7 +8,6 @@ import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -30,14 +29,6 @@ public class TelaPesquisaAluno extends JFrame implements ActionListener, ListSel
 	private AlunoController control = new AlunoController();
 	private JTable table = new JTable(control);
 	private JTextField tfNome;
-	private JTextField tfData;
-	private JTextField tfNomeMae;
-	private JTextField tfTelefone;
-	private JTextField tfCelular;
-	private JTextField tfcpf;
-	private JComboBox<String> cbEscolaridade = new JComboBox<>(Escolaridade);
-	private final static String[] Escolaridade = {"Ensino fundamental incompleto", "Ensino fundamental completo", "Ensino médio incompleto",
-			"Ensino médio completo", "Ensino superior"};
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -127,12 +118,6 @@ public class TelaPesquisaAluno extends JFrame implements ActionListener, ListSel
 	private void alunoToBoundary(Aluno a) {
 		if (a != null) {
 			tfNome.setText(String.valueOf(a.getNome()));
-			tfData.setText(String.valueOf(a.getData()));
-			tfNomeMae.setText(String.valueOf(a.getNomeMae()));
-			tfcpf.setText(String.valueOf(a.getCpf()));
-			tfTelefone.setText(String.valueOf(a.getTelefone()));
-			tfCelular.setText(String.valueOf(a.getCelular()));
-			cbEscolaridade.setSelectedItem(String.valueOf(a.getEscolaridade()));
 		}
 		
 	}
@@ -142,7 +127,6 @@ public class TelaPesquisaAluno extends JFrame implements ActionListener, ListSel
 	public void valueChanged(ListSelectionEvent e) {
 		Aluno a = control.getAlunoFromRow( table.getSelectedRow() );
 		alunoToBoundary(a);
-		
 	}
 }
 	

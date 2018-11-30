@@ -2,17 +2,16 @@ package controller;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.swing.event.TableModelListener;
 import javax.swing.table.TableModel;
-
 import dao.AlunoDAO;
 import dao.AlunoDAOImpl;
 import dao.GenericDAOException;
 import model.Aluno;
 
+
 public class AlunoController implements TableModel {
-	
+
 	private List<Aluno> alunos = new ArrayList<>();
 	private AlunoDAO alunoDAO;
 	
@@ -20,7 +19,7 @@ public class AlunoController implements TableModel {
 		alunoDAO = new AlunoDAOImpl();
 	}
 	
-	public void adicionar(Aluno a) {
+	public void adicionar(Aluno a) { 
 		try {
 			alunoDAO.adicionaAluno(a);
 		} catch (GenericDAOException e) {
@@ -28,48 +27,35 @@ public class AlunoController implements TableModel {
 		}
 	}
 	
-	public Aluno consultaListaAluno(String nome) {
+	public Aluno pesquisarPorNome(String nome) { 
+
 		try {
-			alunos = alunoDAO.consultaListaAluno(nome);
+			alunos = alunoDAO.consultaAluno(nome);
 		} catch (GenericDAOException e) {
+
 			e.printStackTrace();
 		}
+
 		return null;
 	}
 	
-	public void removerAluno(Aluno a) {
-		try {
-			alunoDAO.removerAluno(a);
-		} catch (GenericDAOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	public void atualizarAluno(Aluno a) {
-		try {
-			alunoDAO.atualizaAluno(a);
-		} catch (GenericDAOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	
 	@Override
 	public void addTableModelListener(TableModelListener arg0) {
+		
 		
 	}
 
 	@Override
 	public Class<?> getColumnClass(int col) {
-		switch (col) {
-		case 0 : return String.class;
+		switch (col) { 
+		case 0 : return int.class;
 		case 1 : return String.class;
 		case 2 : return String.class;
 		case 3 : return String.class;
-		case 4 : return String.class;
+		case 4 : return int.class;
 		case 5 : return String.class;
 		case 6 : return String.class;
-		case 7 : return int.class;
+		case 7 : return String.class;
 		}
 		return String.class;
 	}
@@ -81,15 +67,15 @@ public class AlunoController implements TableModel {
 
 	@Override
 	public String getColumnName(int col) {
-		switch (col) {
-		case 0 : return "Nome:";
-		case 1 : return "Nascimento:";
-		case 2 : return "Nome da Mãe:";
-		case 3 : return "CPF:";
-		case 4 : return "Telefone:";
-		case 5 : return "Celular:";
-		case 6 : return "Escolaridade:";
-		case 7 : return "ID";
+		switch (col) { 
+		case 0 : return "ID";
+		case 1 : return "Nome";
+		case 2 : return "Data";
+		case 3 : return "Nome da Mãe";
+		case 4 : return "CPF";
+		case 5 : return "Telefone";
+		case 6 : return "Celular";
+		case 7 : return "Escolaridade";
 		}
 		return "";
 	}
@@ -102,40 +88,36 @@ public class AlunoController implements TableModel {
 	@Override
 	public Object getValueAt(int row, int col) {
 		Aluno a = alunos.get(row);
-		switch (col) {
-			case 0 : return a.getNome();
-			case 1 : return a.getData();
-			case 2 : return a.getNomeMae();
-			case 3 : return a.getCpf();
-			case 4 : return a.getTelefone();
-			case 5 : return a.getCelular();
-			case 6 : return a.getEscolaridade();
-			case 7 : return a.getId();
+		switch (col) { 
+			case 0 : return a.getId();
+			case 1 : return a.getNome();
+			case 2 : return a.getData();
+			case 3 : return a.getNomeMae();
+			case 4 : return a.getCpf();
+			case 5 : return a.getTelefone();
+			case 6 : return a.getCelular();
+			case 7 : return a.getEscolaridade();
 		}
 		return "";
 	}
 
 	@Override
 	public boolean isCellEditable(int arg0, int arg1) {
-		
+		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
 	public void removeTableModelListener(TableModelListener arg0) {
-		
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public void setValueAt(Object arg0, int arg1, int arg2) {
-		
+		// TODO Auto-generated method stub
 		
 	}
-
-	public Aluno getAlunoFromRow(int row) {
-		
-		return alunos.get(row);
-	}
+	
 	
 }

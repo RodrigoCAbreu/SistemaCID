@@ -23,7 +23,7 @@ public class AlunoDAOImpl implements AlunoDAO {
 			pstmt.setString(2, a.getNome());
 			pstmt.setString(3, a.getData());
 			pstmt.setString(4, a.getNomeMae());
-			pstmt.setInt(5, a.getCpf());
+			pstmt.setString(5, a.getCpf());
 			pstmt.setString(6, a.getTelefone());
 			pstmt.setString(7, a.getCelular());
 			pstmt.setString(8, a.getEscolaridade());
@@ -44,7 +44,7 @@ public class AlunoDAOImpl implements AlunoDAO {
 			pstmt.setString(1, a.getNome());
 			pstmt.setString(2, a.getData());
 			pstmt.setString(3, a.getNomeMae());
-			pstmt.setInt(4, a.getCpf());
+			pstmt.setString(4, a.getCpf());
 			pstmt.setString(5, a.getTelefone());
 			pstmt.setString(6, a.getCelular());
 			pstmt.setString(7, a.getEscolaridade());
@@ -84,7 +84,7 @@ public class AlunoDAOImpl implements AlunoDAO {
 				a.setNome(rs.getString("nome"));
 				a.setData(rs.getString("data"));
 				a.setNomeMae(rs.getString("nomeMae"));
-				a.setCpf(rs.getInt("cpf"));
+				a.setCpf(rs.getString("cpf"));
 				a.setTelefone(rs.getString("telefone"));
 				a.setCelular(rs.getString("celular"));
 				a.setEscolaridade(rs.getString("escolaridade"));
@@ -97,8 +97,8 @@ public class AlunoDAOImpl implements AlunoDAO {
 	}
 
 	@Override
-	public List<Aluno> consultaAluno(String nome) throws GenericDAOException {
-		List<Aluno> lista = new ArrayList<>();
+	public List<Aluno> consultaListaAluno(String nome) throws GenericDAOException {
+		List<Aluno> alunos = new ArrayList<>();
 		String sql = "SELECT * FROM aluno WHERE nome like ?";
 		try {
 			PreparedStatement pstmt = con.prepareStatement(sql);
@@ -110,18 +110,18 @@ public class AlunoDAOImpl implements AlunoDAO {
 				a.setNome(rs.getString("nome"));
 				a.setData(rs.getString("data"));
 				a.setNomeMae(rs.getString("nomeMae"));
-				a.setCpf(rs.getInt("cpf"));
+				a.setCpf(rs.getString("cpf"));
 				a.setTelefone(rs.getString("telefone"));
 				a.setCelular(rs.getString("celular"));
 				a.setEscolaridade(rs.getString("escolaridade"));
-				lista.add(a);
+				alunos.add(a);
 			}
 		} catch (SQLException e) {
 			
 			e.printStackTrace();
 		}
 		
-		return lista;
+		return alunos;
 	}
 
 }

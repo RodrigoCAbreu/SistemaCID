@@ -1,21 +1,25 @@
 package wiew;
 
 import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
 public class TelaLogin extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private JTextField tfLoginUsuario;
-	private JPasswordField psfLogin;
+	private JTextField tfLogin;
+	private JPasswordField tfPass;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -56,11 +60,11 @@ public class TelaLogin extends JFrame {
 		lblUsurio.setBounds(204, 197, 57, 14);
 		contentPane.add(lblUsurio);
 		
-		tfLoginUsuario = new JTextField();
-		tfLoginUsuario.setFont(new Font("Arial", Font.PLAIN, 12));
-		tfLoginUsuario.setBounds(259, 195, 246, 20);
-		contentPane.add(tfLoginUsuario);
-		tfLoginUsuario.setColumns(10);
+		tfLogin = new JTextField();
+		tfLogin.setFont(new Font("Arial", Font.PLAIN, 12));
+		tfLogin.setBounds(259, 195, 246, 20);
+		contentPane.add(tfLogin);
+		tfLogin.setColumns(10);
 		
 		JLabel lblSenha = new JLabel("Senha:");
 		lblSenha.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -68,13 +72,24 @@ public class TelaLogin extends JFrame {
 		contentPane.add(lblSenha);
 		
 		JButton btnEntrar = new JButton("Entrar");
+		btnEntrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if (tfLogin.getText().equals("administrador") && tfPass.getText().equals("123456")) {
+					TelaAdministracao tela = new TelaAdministracao();
+					tela.setVisible(true);
+					dispose();
+				} else {
+					JOptionPane.showMessageDialog(null, "Usuário ou senha inválido");
+				}
+			}
+		});
 		btnEntrar.setFont(new Font("Arial", Font.PLAIN, 12));
 		btnEntrar.setBounds(204, 310, 89, 23);
 		contentPane.add(btnEntrar);
 		
-		psfLogin = new JPasswordField();
-		psfLogin.setFont(new Font("Arial", Font.PLAIN, 12));
-		psfLogin.setBounds(259, 246, 246, 20);
-		contentPane.add(psfLogin);
+		tfPass = new JPasswordField();
+		tfPass.setFont(new Font("Arial", Font.PLAIN, 12));
+		tfPass.setBounds(259, 246, 246, 20);
+		contentPane.add(tfPass);
 	}
 }

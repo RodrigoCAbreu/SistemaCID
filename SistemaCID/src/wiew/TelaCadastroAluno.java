@@ -1,14 +1,21 @@
 package wiew;
 
 import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.JLabel;
 import java.awt.Font;
-import javax.swing.JTextField;
-import javax.swing.JComboBox;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
+
+import controller.AlunoController;
+import model.Aluno;
 
 public class TelaCadastroAluno extends JFrame {
 
@@ -21,7 +28,12 @@ public class TelaCadastroAluno extends JFrame {
 	private JTextField tfTelefone;
 	private JTextField tfCelular;
 	private JTextField tfcpf;
-
+	private JComboBox<String> cbEscolaridade = new JComboBox<>(Escolaridade);
+	private final static String[] Escolaridade = {"Ensino fundamental incompleto", "Ensino fundamental completo", "Ensino médio incompleto",
+			"Ensino médio completo", "Ensino superior"};
+	private AlunoController control = new AlunoController();
+	private JTable table = new JTable(control);
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -34,8 +46,10 @@ public class TelaCadastroAluno extends JFrame {
 			}
 		});
 	}
+
 	
 	public TelaCadastroAluno() {
+		
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 750, 430);
 		contentPane = new JPanel();
@@ -106,22 +120,9 @@ public class TelaCadastroAluno extends JFrame {
 		lblEscolaridade.setBounds(25, 290, 76, 14);
 		contentPane.add(lblEscolaridade);
 		
-		String[] escolaridade = {"Ensino fundamental incompleto", "Ensino fundamental completo", "Ensino médio incompleto",
-				"Ensino médio completo", "Ensino superior"};
-		JComboBox<String> cbEscolaridade = new JComboBox<>(escolaridade);
 		cbEscolaridade.setFont(new Font("Arial", Font.PLAIN, 12));
 		cbEscolaridade.setBounds(116, 288, 200, 20);
 		contentPane.add(cbEscolaridade);
-		
-		JButton btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnCadastrar.setBounds(116, 339, 89, 23);
-		contentPane.add(btnCadastrar);
-		
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setFont(new Font("Arial", Font.PLAIN, 12));
-		btnCancelar.setBounds(229, 339, 89, 23);
-		contentPane.add(btnCancelar);
 		
 		JLabel lblNewLabel_3 = new JLabel("CPF:");
 		lblNewLabel_3.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -132,5 +133,41 @@ public class TelaCadastroAluno extends JFrame {
 		tfcpf.setBounds(491, 170, 161, 20);
 		contentPane.add(tfcpf);
 		tfcpf.setColumns(10);
+		
+		JButton btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String cmd = e.getActionCommand();
+				if ("Cadastrar".equals(cmd)) {
+					Aluno a = new Aluno();
+					a.setNome(tfNome.getText());
+					a.setData(tfData.getText());
+					a.setNomeMae(tfNomeMae.getText());
+					a.setCpf(tfcpf.getText());
+					a.setTelefone(tfTelefone.getText());
+					a.setCelular(tfCelular.getText());
+					a.setEscolaridade(Escolaridade[cbEscolaridade.getSelectedIndex()]);
+					control.adicionar(a);
+					table.invalidate();
+					table.revalidate();
+					table.repaint();
+					System.out.println("cadastro adicionado com sucesso");
+					tfNome.setText("");
+					tfData.setText("");
+					tfNomeMae.setText("");
+					tfcpf.setText("");
+					tfTelefone.setText("");
+					tfCelular.setText("");
+				}
+			}
+		});
+		btnCadastrar.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnCadastrar.setBounds(116, 339, 89, 23);
+		contentPane.add(btnCadastrar);
+		
+		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setFont(new Font("Arial", Font.PLAIN, 12));
+		btnCancelar.setBounds(229, 339, 89, 23);
+		contentPane.add(btnCancelar);
 	}
 }

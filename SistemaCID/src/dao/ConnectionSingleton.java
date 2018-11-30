@@ -8,7 +8,7 @@ public class ConnectionSingleton {
 
 	private Connection con;
 	private static ConnectionSingleton instancy;
-	private static final String JDBC_URL = "jdbc:mariadb://localhost:3306/registrodeligacoes";
+	private static final String JDBC_URL = "jdbc:mariadb://localhost:3306/cid";
 	private static final String JDBC_USER = "root";
 	private static final String JDBC_PASS = "";
 	

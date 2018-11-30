@@ -9,4 +9,5 @@ public interface ProfessorDAO {
 	public void removerProfessor(Professor p) throws GenericDAOException;
 	public Professor consultaProfessor(Professor p) throws GenericDAOException;
 	public List<Professor> consultaProfessor(String nome) throws GenericDAOException;
+	public List<Professor> listaProfessores() throws GenericDAOException;
 }

@@ -9,5 +9,5 @@ public interface AlunoDAO {
 	public void atualizaAluno(Aluno a) throws GenericDAOException;
 	public void removerAluno(Aluno a) throws GenericDAOException;
 	public Aluno consultaAluno(Aluno a) throws GenericDAOException;
-	public List<Aluno> consultaAluno(String nome) throws GenericDAOException;
+	public List<Aluno> consultaListaAluno(String nome) throws GenericDAOException;
 }

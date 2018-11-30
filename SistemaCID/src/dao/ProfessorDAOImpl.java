@@ -98,4 +98,24 @@ public class ProfessorDAOImpl implements ProfessorDAO {
 		return lista;
 	}
 
+	@Override
+	public List<Professor> listaProfessores() throws GenericDAOException {
+		List<Professor> listaProfessores = new ArrayList<Professor>();
+		String sql = "SELECT id, nome FROM professor";
+		try {
+			PreparedStatement pstmt = con.prepareStatement(sql);
+			ResultSet rs = pstmt.executeQuery();
+			while(rs.next()) {
+				Professor p = new Professor();
+				p.setId(rs.getInt("id"));
+				p.setNome(rs.getString("nome"));
+				listaProfessores.add(p);
+			}
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }

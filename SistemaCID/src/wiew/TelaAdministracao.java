@@ -12,7 +12,7 @@ import javax.swing.JMenu;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class TeleAdministracao extends JFrame {
+public class TelaAdministracao extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -24,7 +24,7 @@ public class TeleAdministracao extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TeleAdministracao frame = new TeleAdministracao();
+					TelaAdministracao frame = new TelaAdministracao();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -33,10 +33,7 @@ public class TeleAdministracao extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
-	public TeleAdministracao() {
+	public TelaAdministracao() {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 729, 450);
 		contentPane = new JPanel();
@@ -45,15 +42,15 @@ public class TeleAdministracao extends JFrame {
 		contentPane.setLayout(null);
 		
 		JLabel lblSistemaDeGerenciamento = new JLabel("Sistema de gerenciamento CID");
-		lblSistemaDeGerenciamento.setFont(new Font("Arial", Font.BOLD, 18));
 		lblSistemaDeGerenciamento.setBounds(220, 56, 283, 28);
+		lblSistemaDeGerenciamento.setFont(new Font("Arial", Font.BOLD, 18));
 		contentPane.add(lblSistemaDeGerenciamento);
 		
 		JMenuBar menuBar = new JMenuBar();
 		menuBar.setBounds(0, 0, 713, 21);
 		contentPane.add(menuBar);
 		
-		JMenu mnCadastro = new JMenu("Cadastro");
+		JMenu mnCadastro = new JMenu("Alunos");
 		mnCadastro.setFont(new Font("Arial", Font.PLAIN, 12));
 		menuBar.add(mnCadastro);
 		
@@ -67,18 +64,36 @@ public class TeleAdministracao extends JFrame {
 		mnCadastro.add(mntmCadastrarAluno);
 		
 		JMenuItem mntmPesquisarAluno = new JMenuItem("Pesquisar Aluno");
+		mntmPesquisarAluno.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaPesquisaAluno tpAluno = new TelaPesquisaAluno();
+				tpAluno.setVisible(true);
+			}
+		});
 		mnCadastro.add(mntmPesquisarAluno);
 		
 		JMenuItem mntmAtualizarCadastro = new JMenuItem("Atualizar Cadastro");
+		mntmAtualizarCadastro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				TelaAtualizaAluno taAluno = new TelaAtualizaAluno();
+				taAluno.setVisible(true);
+			}
+		});
 		mnCadastro.add(mntmAtualizarCadastro);
 		
 		JMenuItem mntmExclurCadastro = new JMenuItem("Exclu\u00EDr Cadastro");
+		mntmExclurCadastro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaExcluiAluno teAluno = new TelaExcluiAluno();
+				teAluno.setVisible(true);
+			}
+		});
 		mnCadastro.add(mntmExclurCadastro);
 		
 		JMenu mnTurmas = new JMenu("Turmas");
 		menuBar.add(mnTurmas);
 		
-		JMenuItem mntmCadastrarTurmas = new JMenuItem("Cadastrar turma");
+		JMenuItem mntmCadastrarTurmas = new JMenuItem("Cadastro de Turmas");
 		mntmCadastrarTurmas.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				TelaCadastroTurma tcturma = new TelaCadastroTurma();
@@ -87,20 +102,43 @@ public class TeleAdministracao extends JFrame {
 		});
 		mnTurmas.add(mntmCadastrarTurmas);
 		
-		JMenuItem mntmPesquisarTurmas = new JMenuItem("Pesquisar turma");
+		JMenuItem mntmPesquisarTurmas = new JMenuItem("Pesquisar Turmas");
+		mntmPesquisarTurmas.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaPesquisaTurma tpTurma = new TelaPesquisaTurma();
+				tpTurma.setVisible(true);
+			}
+		});
 		mnTurmas.add(mntmPesquisarTurmas);
 		
-		JMenuItem mntmAtualizarTurmar = new JMenuItem("Atualizar turma");
-		mnTurmas.add(mntmAtualizarTurmar);
-		
-		JMenuItem mntmExcluirTurma = new JMenuItem("Excluir turma");
+		JMenuItem mntmExcluirTurma = new JMenuItem("Excluir");
 		mnTurmas.add(mntmExcluirTurma);
 		
 		JMenu mnProfessor = new JMenu("Professor");
 		menuBar.add(mnProfessor);
 		
-		JMenuItem mntmCadastrarProfessor = new JMenuItem("Cadastro de professores");
+		JMenuItem mntmCadastrarProfessor = new JMenuItem("Controle de Professores");
+		mntmCadastrarProfessor.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TelaProfessor tProfessor = new TelaProfessor();
+				tProfessor.setVisible(true);
+			}
+		});
 		mnProfessor.add(mntmCadastrarProfessor);
+		
+		JMenuItem mntmExcluir = new JMenuItem("Excluir");
+		mnProfessor.add(mntmExcluir);
+		
+		JMenu mnSair = new JMenu("Sair");
+		menuBar.add(mnSair);
+		
+		JMenuItem mntmSair = new JMenuItem("Sair");
+		mntmSair.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.exit(0);
+			}
+		});
+		mnSair.add(mntmSair);
 		
 			
 	}

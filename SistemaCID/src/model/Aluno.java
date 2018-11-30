@@ -2,12 +2,12 @@ package model;
 
 public class Aluno {
 	private int id;
-	private String nome;
-	private String data;
-	private String nomeMae;
-	private int cpf;
-	private String telefone;
-	private String celular;
+	private String nome = "";
+	private String data = "";
+	private String nomeMae = "";
+	private String cpf = "";
+	private String telefone = "";
+	private String celular = "";
 	private String escolaridade;
 	
 	public int getId() {
@@ -35,10 +35,10 @@ public class Aluno {
 	public void setNomeMae(String nomeMae) {
 		this.nomeMae = nomeMae;
 	}
-	public int getCpf() {
+	public String getCpf() {
 		return cpf;
 	}
-	public void setCpf(int cpf) {
+	public void setCpf(String cpf) {
 		this.cpf = cpf;
 	}
 	public String getTelefone() {

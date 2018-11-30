@@ -1,0 +1,71 @@
+package wiew;
+
+import java.awt.BorderLayout;
+import java.awt.Button;
+import java.awt.Color;
+import java.awt.EventQueue;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.JTextField;
+
+import controller.Controller;
+import model.Aluno;
+
+
+public class TelaPesquisaAluno implements ActionListener {
+	
+	private JFrame janela;
+	private JTextField txtnome = new JTextField(50);
+	private JButton btnPesquisar = new JButton("Pesquisar");
+	private Controller control = new Controller();
+	private JTable table = new JTable(control);
+	
+	public TelaPesquisaAluno() {
+		janela = new JFrame("Pesquisa de alunos");
+		JPanel panCampos = new JPanel(new GridLayout(2,2));
+		JPanel panPrincipal = new JPanel(new BorderLayout());
+		JScrollPane panTable = new JScrollPane();
+		
+		panCampos.add(new JLabel("Nome do Aluno:"));
+		panCampos.add(txtnome);
+		panCampos.add(btnPesquisar);
+		
+		btnPesquisar.addActionListener(this);
+		panTable.getViewport().add(table);
+		panPrincipal.add(panCampos, BorderLayout.NORTH);
+		panPrincipal.add(panTable, BorderLayout.CENTER);
+		janela.setContentPane(panPrincipal);
+		
+		janela.setSize(730, 450);
+		janela.setVisible(true);
+		
+	}
+	
+	public static void main(String[] args) {
+		new TelaPesquisaAluno();
+	}
+	
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		String cmd = e.getActionCommand();
+		if ("Pesquisar".equals(cmd)) {
+			Aluno a = control.consultaListaAluno(txtnome.getText());
+			if ( a!= null ) {
+				txtnome.setText(a.getNome());
+			}
+			table.invalidate();
+			table.revalidate();
+			table.repaint();
+		}
+	}
+
+	
+}
